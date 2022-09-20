@@ -1,0 +1,46 @@
+---
+title: "8105 HW1"
+output: html_document
+---
+
+This is an R markdown document for HW1
+
+```{r}
+library(tidyverse)
+```
+
+# Problem 1
+
+```{r}
+data("penguins", package = "palmerpenguins")
+```
+
+_penguins _ is a **dataset** that includes variables of `species`, `island`, `bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, `body_mass_h`, `sex`, and `year`. `Species` includes "Adelie","Chinstrap", and "Gentoo". `Island` includes "Torgersen", "Biscoe", and "Dream". The    `year` ranges from 2007 to 2009. 
+
+Here's a **code chunk** that calculate the size of the dataset.  
+
+```{r}
+nrow(penguins)
+ncol(penguins)
+```
+The dataset has 344 rows and 8 columns. 
+
+```{r}
+max(penguins$bill_length_mm, na.rm = TRUE)
+min(penguins$bill_length_mm, na.rm = TRUE)
+mean(penguins$bill_length_mm, na.rm = TRUE)
+```
+
+The max value of `bill_length_mm` is 59.6mm and the min is 32.1mm. The mean of `bill_length_mm` is 43.92193mm.
+
+```{r}
+max(penguins$flipper_length_mm, na.rm = TRUE)
+min(penguins$flipper_length_mm, na.rm = TRUE)
+mean(penguins$flipper_length_mm, na.rm = TRUE)
+```
+
+The max value of `flipper_length_mm` is 231mm and the min is 172mm.The mean of `flipper_length_mm` is 200.9152mm. 
+
+```{r warning = FALSE}
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
+```
