@@ -15,7 +15,13 @@ library(tidyverse)
 data("penguins", package = "palmerpenguins")
 ```
 
-_penguins _ is a **dataset** that includes variables of `species`, `island`, `bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, `body_mass_h`, `sex`, and `year`. `Species` includes "Adelie","Chinstrap", and "Gentoo". `Island` includes "Torgersen", "Biscoe", and "Dream". The    `year` ranges from 2007 to 2009. 
+Here is a summary of the _penguins_ dataset. 
+
+```{r echo = FALSE}
+skimr::skim(penguins)
+```
+
+_penguins_ is a **dataset** that includes variables of `species`, `island`, `bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, `body_mass_h`, `sex`, and `year`. `Species` includes "Adelie","Chinstrap", and "Gentoo". `Island` includes "Torgersen", "Biscoe", and "Dream". The    `year` ranges from 2007 to 2009. 
 
 Here's a **code chunk** that calculate the size of the dataset.  
 
@@ -44,3 +50,57 @@ The max value of `flipper_length_mm` is 231mm and the min is 172mm.The mean of `
 ```{r warning = FALSE}
 ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
 ```
+
+## Problem 2
+```{r}
+hw_df = 
+  tibble(
+    norm_sample = rnorm(10),
+    vec_logical = norm_sample > 0,
+    vec_char = c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j"),
+    vec_factor = factor(c("low", "medium", "high", "low", "medium", "high", "low", "medium", "high", "low"))
+  )
+```
+
+Here's a **code chunk** to calculate the mean of each variable in my dataframe.
+```{r}
+hw_df %>% pull(norm_sample)
+mean(hw_df$norm_sample)
+```
+
+```{r}
+hw_df %>% pull(vec_logical)
+mean(hw_df$vec_logical)
+```
+
+```{r}
+hw_df %>% pull(vec_char)
+mean(hw_df$vec_char)
+```
+
+```{r}
+hw_df %>% pull(vec_factor)
+mean(hw_df$vec_factor)
+```
+
+The mean calculation works for random samples and logical vector but doesn't work for character vector and factor vector. 
+
+Here I used the `as.numeric` function to explicitly convert  logical, character, and factor variables from to numeric vectors. 
+
+```{r eval = FALSE}
+as.numeric(hw_df$vec_logical)
+as.numeric(hw_df$vec_char)
+as.numeric(hw_df$vec_factor)
+```
+
+Logical vector is successfully converted to numeric variable by converting `TRUE` to a numeric value of 1 and `FALSE` to 0. Therefore, I could calculate the mean of the logical vector.
+
+Character vector cannot be converted to a numeric variable and the output is NA for all. Therefore, I could not calculate the mean of the character vector. 
+
+Factor vector is converted to levels with "high" corresponding to 1, "low" corresponding to 2, and "medium" corresponding to 3. But this is not numerical value and the mean cannot be calculated. 
+
+In summary, the mean calculation only works for numeric and logical vectors. 
+
+
+
+
