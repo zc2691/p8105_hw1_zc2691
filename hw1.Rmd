@@ -1,6 +1,6 @@
 ---
 title: "8105 HW1"
-output: html_document
+output: github_document
 ---
 
 This is an R markdown document for HW1
